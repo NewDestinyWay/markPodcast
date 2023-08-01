@@ -34,29 +34,61 @@ struct Result: Decodable {
 final class NetworkManager {
     static let shared = NetworkManager()
     
-    func loadPodcast(byPodcastLink link: String,
-                      completion: @escaping (_ rssFeed: String?)->Void) {
+    func loadPodcasts(byPodcastLink link: String,
+                      completion: @escaping (_ posts: [RSS_Post])->Void) {
         
         let linksBuilder = LinksBuilder(link: link)
+
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
         var request = URLRequest(url: URL(string: linksBuilder.iTunesLink)!)
         request.httpMethod = "GET"
         
         let task = session.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self, let data = data else {
-                completion(nil)
+                completion([])
                 return
             }
 
             do {
                 let res = try JSONDecoder().decode(PodcastJSONInfo.self, from: data)
                 let rssUrl = res.results.first?.feedUrl?.toUrl()
-                self.loadRSSFeed(url: rssUrl) { res in
-                    print("rese")
-                }
+                self.loadRSSFeed(url: rssUrl, completion: completion)
             } catch {
-                completion(nil)
+                completion([])
             }
+        }
+        task.resume()
+    }
+    
+    func downloadPodcastAudio(byLink link: String,
+                              completion: @escaping (_ data: Data?)->Void) {
+        guard let url = link.toUrl() else {
+            completion(nil)
+            return
+        }
+        
+        let session = URLSession(configuration: .default)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let task = session.dataTask(with: request) { data, response, error in
+            completion(data)
+        }
+        task.resume()
+    }
+    
+    func downloadAudio(byLink link: String,
+                       completion: @escaping (_ data: Data?)->Void) {
+        guard let url = link.toUrl() else {
+            completion(nil)
+            return
+        }
+        
+        let session = URLSession(configuration: .default)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let task = session.dataTask(with: request) { data, _, _ in
+            completion(data)
         }
         task.resume()
     }
@@ -65,24 +97,23 @@ final class NetworkManager {
 // MARK: - Private
 private extension NetworkManager {
     func loadRSSFeed(url: URL?,
-                     completion: @escaping (_ res: String?)->Void) {
+                     completion: @escaping (_ posts: [RSS_Post])->Void) {
         guard let url = url else {
-            completion(nil)
+            completion([])
             return
         }
         
-        print(url)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         let task = session.dataTask(with: request) { data, response, error in
             guard let data = data else {
-                completion(nil)
+                completion([])
                 return
             }
             let parser = RSSParser(rssAsData: data, delegate: nil)
-            print(data)
+            completion(parser.posts)
         }
         task.resume()
     }
