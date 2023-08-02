@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE2B6F2B2A7906A3004C23CE /* PodcastAudioWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F2A2A7906A3004C23CE /* PodcastAudioWorker.swift */; };
 		EE4C65052A6C74710022FAB1 /* респонсы in Resources */ = {isa = PBXBuildFile; fileRef = EE4C65042A6C74710022FAB1 /* респонсы */; };
 		EEA234992A6D9F0B00E6A5CD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA234982A6D9F0B00E6A5CD /* String.swift */; };
 		EEB48B982A6AFA4B00FE5D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB48B972A6AFA4B00FE5D22 /* AppDelegate.swift */; };
@@ -17,7 +18,6 @@
 		EEB48BA42A6AFA4D00FE5D22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEB48BA22A6AFA4D00FE5D22 /* LaunchScreen.storyboard */; };
 		EEB48BAD2A6AFA7F00FE5D22 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB48BAC2A6AFA7F00FE5D22 /* Links.swift */; };
 		EEB48BB02A6B053500FE5D22 /* домыслы in Resources */ = {isa = PBXBuildFile; fileRef = EEB48BAF2A6B053500FE5D22 /* домыслы */; };
-		EEB48BB32A6B065800FE5D22 /* ARFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB48BB22A6B065800FE5D22 /* ARFileManager.swift */; };
 		EEB48BB52A6C738D00FE5D22 /* план in Resources */ = {isa = PBXBuildFile; fileRef = EEB48BB42A6C738D00FE5D22 /* план */; };
 		EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB65B492A703FCE003F593F /* RSSParser.swift */; };
 		EEB65B4C2A753183003F593F /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EEB65B4B2A753183003F593F /* music.mp3 */; };
@@ -25,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE2B6F2A2A7906A3004C23CE /* PodcastAudioWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastAudioWorker.swift; sourceTree = "<group>"; };
 		EE4C65042A6C74710022FAB1 /* респонсы */ = {isa = PBXFileReference; lastKnownFileType = text; path = "респонсы"; sourceTree = "<group>"; };
 		EEA234982A6D9F0B00E6A5CD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		EEB48B942A6AFA4B00FE5D22 /* podcastCropper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podcastCropper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,7 +38,6 @@
 		EEB48BA52A6AFA4D00FE5D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEB48BAC2A6AFA7F00FE5D22 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		EEB48BAF2A6B053500FE5D22 /* домыслы */ = {isa = PBXFileReference; lastKnownFileType = text; path = "домыслы"; sourceTree = "<group>"; };
-		EEB48BB22A6B065800FE5D22 /* ARFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFileManager.swift; sourceTree = "<group>"; };
 		EEB48BB42A6C738D00FE5D22 /* план */ = {isa = PBXFileReference; lastKnownFileType = text; path = "план"; sourceTree = "<group>"; };
 		EEB65B492A703FCE003F593F /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
 		EEB65B4B2A753183003F593F /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
@@ -120,8 +120,8 @@
 		EEB48BB12A6B064E00FE5D22 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EEB48BB22A6B065800FE5D22 /* ARFileManager.swift */,
 				EEB65B492A703FCE003F593F /* RSSParser.swift */,
+				EE2B6F2A2A7906A3004C23CE /* PodcastAudioWorker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -214,8 +214,8 @@
 				EEB48B982A6AFA4B00FE5D22 /* AppDelegate.swift in Sources */,
 				EEB48B9A2A6AFA4B00FE5D22 /* SceneDelegate.swift in Sources */,
 				EEA234992A6D9F0B00E6A5CD /* String.swift in Sources */,
+				EE2B6F2B2A7906A3004C23CE /* PodcastAudioWorker.swift in Sources */,
 				EEB48BAD2A6AFA7F00FE5D22 /* Links.swift in Sources */,
-				EEB48BB32A6B065800FE5D22 /* ARFileManager.swift in Sources */,
 				EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

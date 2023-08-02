@@ -17,7 +17,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let url = "https://traffic.libsyn.com/secure/whyarewestillalive/PMG_01s01e_Chemeotherapy_FIN.mp3?dest-id=2847719"
+        PodcastAudioWorker.shared.downloadAudio(byAudioUrl: url.toUrl()) { _ in
+            print("ok")
+        }
+        /*
         let link = Links.podcast1.rawValue.replaceASCIIWithCirillic()
         NetworkManager.shared.loadPodcasts(byPodcastLink: link) { [weak self] posts in
             guard let podcastNameStartIndex = link.endIndex(of: "podcast/") else { return }
@@ -32,14 +36,16 @@ class ViewController: UIViewController {
             })
             
             guard self.currentPodcast != nil else { return }
-            NetworkManager.shared.downloadPodcastAudio(byLink: self.currentPodcast.mp3Link) { data in
-                guard let data = data else {
-                    print("ERROR")
-                    return
-                }
-                print("success")
-            }
+//            NetworkManager.shared.downloadPodcastAudio(byLink: self.currentPodcast.mp3Link) { data in
+//                guard let data = data else {
+//                    print("ERROR")
+//                    return
+//                }
+//                print("success")
+//            }
+//            PodcastAudioWorker.shared.downloadAudio(byAudioUrl: self.currentPodcast.mp3Link.toUrl())
         }
+         */
     }
 
 //    override func viewDidAppear(_ animated: Bool) {
