@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		EE2B6F2B2A7906A3004C23CE /* PodcastAudioWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F2A2A7906A3004C23CE /* PodcastAudioWorker.swift */; };
+		EE2B6F2E2A7A64F9004C23CE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F2D2A7A64F9004C23CE /* UIViewController.swift */; };
+		EE2B6F312A7B806A004C23CE /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F302A7B806A004C23CE /* StyledButton.swift */; };
+		EE2B6F332A7B807F004C23CE /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F322A7B807F004C23CE /* UIButton.swift */; };
+		EE2B6F352A7B80CC004C23CE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F342A7B80CC004C23CE /* UIImage.swift */; };
+		EE2B6F372A7B97EF004C23CE /* AssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F362A7B97EF004C23CE /* AssetsManager.swift */; };
+		EE2B6F392A7B99D2004C23CE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F382A7B99D2004C23CE /* UIView.swift */; };
 		EE4C65052A6C74710022FAB1 /* респонсы in Resources */ = {isa = PBXBuildFile; fileRef = EE4C65042A6C74710022FAB1 /* респонсы */; };
 		EEA234992A6D9F0B00E6A5CD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA234982A6D9F0B00E6A5CD /* String.swift */; };
 		EEB48B982A6AFA4B00FE5D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB48B972A6AFA4B00FE5D22 /* AppDelegate.swift */; };
@@ -26,6 +32,12 @@
 
 /* Begin PBXFileReference section */
 		EE2B6F2A2A7906A3004C23CE /* PodcastAudioWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastAudioWorker.swift; sourceTree = "<group>"; };
+		EE2B6F2D2A7A64F9004C23CE /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		EE2B6F302A7B806A004C23CE /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
+		EE2B6F322A7B807F004C23CE /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		EE2B6F342A7B80CC004C23CE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		EE2B6F362A7B97EF004C23CE /* AssetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsManager.swift; sourceTree = "<group>"; };
+		EE2B6F382A7B99D2004C23CE /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		EE4C65042A6C74710022FAB1 /* респонсы */ = {isa = PBXFileReference; lastKnownFileType = text; path = "респонсы"; sourceTree = "<group>"; };
 		EEA234982A6D9F0B00E6A5CD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		EEB48B942A6AFA4B00FE5D22 /* podcastCropper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podcastCropper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,10 +67,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE2B6F2F2A7B8061004C23CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B6F302A7B806A004C23CE /* StyledButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EEA234972A6D9F0200E6A5CD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				EEA234982A6D9F0B00E6A5CD /* String.swift */,
+				EE2B6F2D2A7A64F9004C23CE /* UIViewController.swift */,
+				EE2B6F322A7B807F004C23CE /* UIButton.swift */,
+				EE2B6F342A7B80CC004C23CE /* UIImage.swift */,
+				EE2B6F382A7B99D2004C23CE /* UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -82,6 +106,7 @@
 		EEB48B962A6AFA4B00FE5D22 /* podcastCropper */ = {
 			isa = PBXGroup;
 			children = (
+				EE2B6F2F2A7B8061004C23CE /* View */,
 				EEB65B4B2A753183003F593F /* music.mp3 */,
 				EEA234972A6D9F0200E6A5CD /* Extensions */,
 				EEE281202A6CE10400CAB2CF /* Network */,
@@ -122,6 +147,7 @@
 			children = (
 				EEB65B492A703FCE003F593F /* RSSParser.swift */,
 				EE2B6F2A2A7906A3004C23CE /* PodcastAudioWorker.swift */,
+				EE2B6F362A7B97EF004C23CE /* AssetsManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -211,10 +237,16 @@
 			files = (
 				EEE281222A6CE14600CAB2CF /* NetworkManager.swift in Sources */,
 				EEB48B9C2A6AFA4B00FE5D22 /* ViewController.swift in Sources */,
+				EE2B6F312A7B806A004C23CE /* StyledButton.swift in Sources */,
+				EE2B6F372A7B97EF004C23CE /* AssetsManager.swift in Sources */,
+				EE2B6F2E2A7A64F9004C23CE /* UIViewController.swift in Sources */,
 				EEB48B982A6AFA4B00FE5D22 /* AppDelegate.swift in Sources */,
 				EEB48B9A2A6AFA4B00FE5D22 /* SceneDelegate.swift in Sources */,
 				EEA234992A6D9F0B00E6A5CD /* String.swift in Sources */,
 				EE2B6F2B2A7906A3004C23CE /* PodcastAudioWorker.swift in Sources */,
+				EE2B6F332A7B807F004C23CE /* UIButton.swift in Sources */,
+				EE2B6F392A7B99D2004C23CE /* UIView.swift in Sources */,
+				EE2B6F352A7B80CC004C23CE /* UIImage.swift in Sources */,
 				EEB48BAD2A6AFA7F00FE5D22 /* Links.swift in Sources */,
 				EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */,
 			);
