@@ -31,8 +31,20 @@ struct Result: Decodable {
 }
 
 // MARK: - Network Manager
+typealias NetManCompletion = (data: Data?, response: URLResponse?, error: Error?)
 final class NetworkManager {
     static let shared = NetworkManager()
+    
+    func get(byUrl url: URL?, completion: @escaping (_ netManCompl: NetManCompletion)->Void) {
+        guard let url = url else { completion((nil, nil, nil)); return }
+        let session = URLSession(configuration: .default)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let task = session.dataTask(with: request) { data, response, error in
+            completion((data: data, response: response, error: error))
+        }
+        task.resume()
+    }
     
     func loadPodcasts(byPodcastLink link: String,
                       completion: @escaping (_ posts: [RSS_Post])->Void) {

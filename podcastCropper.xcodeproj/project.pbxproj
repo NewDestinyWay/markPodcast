@@ -15,6 +15,8 @@
 		EE2B6F372A7B97EF004C23CE /* AssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F362A7B97EF004C23CE /* AssetsManager.swift */; };
 		EE2B6F392A7B99D2004C23CE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B6F382A7B99D2004C23CE /* UIView.swift */; };
 		EE4C65052A6C74710022FAB1 /* респонсы in Resources */ = {isa = PBXBuildFile; fileRef = EE4C65042A6C74710022FAB1 /* респонсы */; };
+		EE6A963D2A93B2A300962C32 /* ViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6A963C2A93B2A300962C32 /* ViewControllerModel.swift */; };
+		EE6A96402A93B3C200962C32 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6A963F2A93B3C200962C32 /* Podcast.swift */; };
 		EEA234992A6D9F0B00E6A5CD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA234982A6D9F0B00E6A5CD /* String.swift */; };
 		EEB48B982A6AFA4B00FE5D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB48B972A6AFA4B00FE5D22 /* AppDelegate.swift */; };
 		EEB48B9A2A6AFA4B00FE5D22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB48B992A6AFA4B00FE5D22 /* SceneDelegate.swift */; };
@@ -28,6 +30,7 @@
 		EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB65B492A703FCE003F593F /* RSSParser.swift */; };
 		EEB65B4C2A753183003F593F /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EEB65B4B2A753183003F593F /* music.mp3 */; };
 		EEE281222A6CE14600CAB2CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE281212A6CE14600CAB2CF /* NetworkManager.swift */; };
+		EEFA82E42A800DF2005A08CC /* WaveGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,8 @@
 		EE2B6F362A7B97EF004C23CE /* AssetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsManager.swift; sourceTree = "<group>"; };
 		EE2B6F382A7B99D2004C23CE /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		EE4C65042A6C74710022FAB1 /* респонсы */ = {isa = PBXFileReference; lastKnownFileType = text; path = "респонсы"; sourceTree = "<group>"; };
+		EE6A963C2A93B2A300962C32 /* ViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerModel.swift; sourceTree = "<group>"; };
+		EE6A963F2A93B3C200962C32 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		EEA234982A6D9F0B00E6A5CD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		EEB48B942A6AFA4B00FE5D22 /* podcastCropper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podcastCropper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB48B972A6AFA4B00FE5D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +59,7 @@
 		EEB65B492A703FCE003F593F /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
 		EEB65B4B2A753183003F593F /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		EEE281212A6CE14600CAB2CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +77,17 @@
 			isa = PBXGroup;
 			children = (
 				EE2B6F302A7B806A004C23CE /* StyledButton.swift */,
+				EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EE6A963E2A93B3BE00962C32 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EE6A963F2A93B3C200962C32 /* Podcast.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		EEA234972A6D9F0200E6A5CD /* Extensions */ = {
@@ -106,6 +121,7 @@
 		EEB48B962A6AFA4B00FE5D22 /* podcastCropper */ = {
 			isa = PBXGroup;
 			children = (
+				EE6A963E2A93B3BE00962C32 /* Models */,
 				EE2B6F2F2A7B8061004C23CE /* View */,
 				EEB65B4B2A753183003F593F /* music.mp3 */,
 				EEA234972A6D9F0200E6A5CD /* Extensions */,
@@ -116,6 +132,7 @@
 				EEB48B972A6AFA4B00FE5D22 /* AppDelegate.swift */,
 				EEB48B992A6AFA4B00FE5D22 /* SceneDelegate.swift */,
 				EEB48B9B2A6AFA4B00FE5D22 /* ViewController.swift */,
+				EE6A963C2A93B2A300962C32 /* ViewControllerModel.swift */,
 				EEB48B9D2A6AFA4B00FE5D22 /* Main.storyboard */,
 				EEB48BA02A6AFA4D00FE5D22 /* Assets.xcassets */,
 				EEB48BA22A6AFA4D00FE5D22 /* LaunchScreen.storyboard */,
@@ -242,10 +259,13 @@
 				EE2B6F2E2A7A64F9004C23CE /* UIViewController.swift in Sources */,
 				EEB48B982A6AFA4B00FE5D22 /* AppDelegate.swift in Sources */,
 				EEB48B9A2A6AFA4B00FE5D22 /* SceneDelegate.swift in Sources */,
+				EEFA82E42A800DF2005A08CC /* WaveGenerator.swift in Sources */,
 				EEA234992A6D9F0B00E6A5CD /* String.swift in Sources */,
+				EE6A963D2A93B2A300962C32 /* ViewControllerModel.swift in Sources */,
 				EE2B6F2B2A7906A3004C23CE /* PodcastAudioWorker.swift in Sources */,
 				EE2B6F332A7B807F004C23CE /* UIButton.swift in Sources */,
 				EE2B6F392A7B99D2004C23CE /* UIView.swift in Sources */,
+				EE6A96402A93B3C200962C32 /* Podcast.swift in Sources */,
 				EE2B6F352A7B80CC004C23CE /* UIImage.swift in Sources */,
 				EEB48BAD2A6AFA7F00FE5D22 /* Links.swift in Sources */,
 				EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */,
@@ -324,7 +344,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -378,7 +398,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -393,9 +413,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GPX6FW3N3H;
+				DEVELOPMENT_TEAM = K6X78M6486;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = podcastCropper/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -409,8 +430,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = team228.podcastCropper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markpodcasts.markpodcasts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -422,9 +444,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GPX6FW3N3H;
+				DEVELOPMENT_TEAM = K6X78M6486;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = podcastCropper/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -438,8 +461,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = team228.podcastCropper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markpodcasts.markpodcasts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -12,8 +12,9 @@ import MediaPlayer
 class ViewController: UIViewController {
     // MARK: - Vars
     private var audioPlayer: AVAudioPlayer!
-    private var currentPodcast: RSS_Post!
+    private var currentPodcast: Podcast!
     private var playbackUpdater: CADisplayLink!
+    private let model = ViewControllerModel()
     
     // MARK: - UI
     private let podcastNameLbl: UILabel = {
@@ -56,54 +57,34 @@ class ViewController: UIViewController {
         return btn
     }()
     
+    // MARK: - CROP UI
+    enum CropUITags: Int {
+        case tfCropFrom = 0
+        case pickerCropFrom = 1
+        
+        case tfCropTo = 2
+        case pickerCropTo = 3
+    }
+    
+    private let tfCropFrom = UITextField()
+    private let pickerCropFrom = UIPickerView()
+    private let tfCropTo = UITextField()
+    private let pickerCropTo = UIPickerView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         
-        let link = Links.podcast1.rawValue.replaceASCIIWithCirillic()
-        NetworkManager.shared.loadPodcasts(byPodcastLink: link) { [weak self] posts in
-            guard let self = self else { fatalError("cant grab self") }
-            
-            guard let nameStartIndex = link.endIndex(of: "podcast/") else { return }
-            guard let nameEndIndex = link.index(of: "/id") else { return }
-            let podcastNameFromLink = String(link[nameStartIndex..<nameEndIndex]).replacingOccurrences(of: "-", with: " ")
-            posts.forEach({
-                if podcastNameFromLink.lowercased() == $0.title.lowercased() {
-                    self.currentPodcast = $0
-                }
-            })
-            
-            guard self.currentPodcast != nil else {
-                self.showAlertInMainThread(message: "We cant find your podcast from downloaded")
-                return
-            }
-            PodcastAudioWorker.shared.downloadAudio(byAudioUrl: self.currentPodcast.mp3Link.toUrl()) { audioFileLoc in
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else {
-                        fatalError("cant grab self")
-                    }
-                    self.playPodcast(fileURL: audioFileLoc)
-                }
+        model.fetchPodcastInfo(byStringUrl: Links.podcast1.rawValue) { [weak self] podcast in
+            guard let self = self else { return }
+            self.currentPodcast = podcast
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.playPodcast(fileURL: podcast.audioFileLoc)
             }
         }
     }
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        DispatchQueue.main.async {
-//            let sysMP :MPMusicPlayerController & MPSystemMusicPlayerController = MPMusicPlayerController.systemMusicPlayer
-//
-//            //Grab current playing
-//            let currItem : MPMediaItem? = sysMP.nowPlayingItem
-//
-//            //Grab currItem's artwork
-//
-//            // Create a new alert
-//            var dialogMessage = UIAlertController(title: "Title is", message: currItem?.title, preferredStyle: .alert)
-//            self.present(dialogMessage, animated: true, completion: nil)
-//        }
-//    }
 }
 
 // MARK: - Private
@@ -149,8 +130,74 @@ private extension ViewController {
             playbackUpdater = CADisplayLink(target: self, selector: #selector(playbackProgressDidChange))
             playbackUpdater.preferredFramesPerSecond = 1
             playbackUpdater.add(to: .current, forMode: .common)
+            setupCropSection()
         } catch {
             print(error)
+        }
+    }
+    
+    func setupCropSection() {
+        tfCropFrom.inputView = pickerCropFrom
+        pickerCropFrom.delegate = self
+        pickerCropFrom.dataSource = self
+        addPickerDoneBtn(toTextField: tfCropFrom)
+        
+        tfCropTo.inputView = pickerCropTo
+        pickerCropTo.delegate = self
+        pickerCropTo.dataSource = self
+        addPickerDoneBtn(toTextField: tfCropTo)
+
+        let lbl = UILabel()
+        lbl.text = "Crop Audio"
+        
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        
+        let fromLbl = UILabel()
+        fromLbl.text = "From"
+        fromLbl.attachTo(view: v, toSides: [.left, .top, .bottom])
+        tfCropFrom.attachTo(view: v, toSides: [.top, .bottom])
+        NSLayoutConstraint.activate([
+            tfCropFrom.leftAnchor.constraint(equalTo: fromLbl.rightAnchor, constant: 10)
+        ])
+        
+        let toLbl = UILabel()
+        toLbl.text = "To"
+        toLbl.attachTo(view: v, toSides: [.top, .bottom])
+        tfCropTo.attachTo(view: v, toSides: [.top, .bottom, .right])
+        NSLayoutConstraint.activate([
+            toLbl.rightAnchor.constraint(equalTo: tfCropTo.leftAnchor, constant: 10)
+        ])
+        
+        pickerCropFrom.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        pickerCropTo.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        v.attachTo(view: self.view, toSides: [.left, .right, .bottom])
+    }
+    
+    func addPickerDoneBtn(toTextField tf: UITextField) {
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        toolBar.translatesAutoresizingMaskIntoConstraints = false
+        toolBar.sizeToFit()
+        toolBar.tintColor = .black
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(pickerDoneBtnTapped))
+        toolBar.setItems([doneBtn], animated: false)
+        tf.inputAccessoryView = toolBar
+    }
+    
+    func cropAudio(from startTime: Double, to endTime: Double, completion: @escaping (_ outUrl: URL)->Void) {
+        PodcastAudioWorker.shared.cropAudio(from: 0, to: 0) { outUrl in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { fatalError("cant grab self in crop audio func") }
+                do {
+                    try self.audioPlayer = AVAudioPlayer(contentsOf: outUrl)
+                    self.audioPlayer.prepareToPlay()
+                    self.audioPlayer.play()
+                    
+                    self.setupCropSection()
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
 }
@@ -186,8 +233,60 @@ private extension ViewController {
         let normalizedTime = Float(audioPlayer.currentTime / audioPlayer.duration)
         progressBar.setProgress(normalizedTime, animated: true)
     }
+    
+    @objc func pickerDoneBtnTapped() {
+        let formatter = DateFormatter()
+        self.view.endEditing(true)
+    }
+}
+
+// MARK: - UIPickerViewDataSource & Delegate
+extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        let duration = audioPlayer.duration
+        if duration >= 3600 { return 3 }
+        else if duration > 60 { return 2 }
+        else { return 1 }
+        
+//        if pickerView.tag == CropUITags.pickerCropFrom.rawValue {
+//
+//        } else if pickerView.tag == CropUITags.pickerCropTo.rawValue {
+//
+//        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let duration = audioPlayer.duration
+        switch component {
+        case 0: // hours
+            return Int(duration) / 3600
+        case 1: // minutes
+            return 59
+        case 2: // seconds
+            return 59
+        default: return 0
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView,
+                    viewForRow row: Int,
+                    forComponent component: Int,
+                    reusing view: UIView?) -> UIView {
+        var label = UILabel()
+        if let v = view as? UILabel { label = v }
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = (row + 1).description
+        label.textAlignment = .center
+        return label
+    }
 }
 
 // MARK: - AVAudioPlayerDelegate
 extension ViewController: AVAudioPlayerDelegate {
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        currentTextFieldTag = textField.tag
+    }
 }

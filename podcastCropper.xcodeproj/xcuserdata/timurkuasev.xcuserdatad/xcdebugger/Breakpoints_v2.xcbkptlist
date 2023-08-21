@@ -3,4 +3,102 @@
    uuid = "7CF0D110-D57F-4DB8-9B48-EA27935F8275"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DD16DDED-4A95-4B88-9365-90D46660D66B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "podcastCropper/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "pickerView(_:viewForRow:forComponent:reusing:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A60AF8F1-8BE8-40D8-BE0A-B5C076C3F03B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "podcastCropper/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "pickerView(_:numberOfRowsInComponent:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E74699B5-DE1A-4A1C-8312-1070D0507638"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "podcastCropper/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "numberOfComponents(in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B5B1D076-FC5C-41DA-B506-BE4D336C0B2A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "podcastCropper/ViewControllerModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "fetchPodcastInfo(byStringUrl:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B5B1D076-FC5C-41DA-B506-BE4D336C0B2A - 541ace1c29ffa3e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in closure #3 () -&gt; () in podcastCropper.ViewControllerModel.fetchPodcastInfo(byStringUrl: Swift.Optional&lt;Swift.String&gt;, completion: (podcastCropper.Podcast) -&gt; ()) -&gt; ()"
+                  moduleName = "podcastCropper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timurkuasev/MEGA/swift/podcastCropper/podcastCropper/ViewControllerModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "291">
+               </Location>
+               <Location
+                  uuid = "B5B1D076-FC5C-41DA-B506-BE4D336C0B2A - d778364319e60933"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #2 (Swift.Optional&lt;Foundation.URL&gt;) -&gt; () in closure #3 () -&gt; () in podcastCropper.ViewControllerModel.fetchPodcastInfo(byStringUrl: Swift.Optional&lt;Swift.String&gt;, completion: (podcastCropper.Podcast) -&gt; ()) -&gt; ()"
+                  moduleName = "podcastCropper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timurkuasev/MEGA/swift/podcastCropper/podcastCropper/ViewControllerModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
