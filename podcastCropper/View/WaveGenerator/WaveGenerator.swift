@@ -36,10 +36,24 @@ class WaveGenerator {
     
     private func generateWaveImage(
         _ samples: UnsafeBufferPointer<Float>,
-        _ imageSize: CGSize,
+        _ imageHeight: CGFloat,
         _ strokeColor: UIColor,
+        _ duration: Double,
+        _ zoomTimeInterval: AudioWaveZoomLvls,
         _ backgroundColor: UIColor
     ) -> UIImage? {
+        
+        let audioLineW: CGFloat = 4
+        let spaceBtwAudioLines: CGFloat = 2
+        let frameW = audioLineW + spaceBtwAudioLines
+        let framesInTimeSection = 25
+        
+        let framesCount = Int(duration / zoomTimeInterval.rawValue * Double(framesInTimeSection))
+        var imgTotalWidth = CGFloat(framesCount) * audioLineW
+        imgTotalWidth += CGFloat(framesCount) * spaceBtwAudioLines
+        let imageSize = CGSize(width: imgTotalWidth, height: imageHeight)
+        // а дальше рисуем
+        
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
         
         guard let context: CGContext = UIGraphicsGetCurrentContext() else { return nil }
@@ -51,35 +65,28 @@ class WaveGenerator {
         context.setAlpha(1.0)
         context.fill(drawingRect)
         
-        let voiceBlockW: CGFloat = 20
-        context.setLineWidth(voiceBlockW)
+        context.setLineWidth(audioLineW)
         
         let max: CGFloat = CGFloat(samples.max() ?? 0)
-        let heightNormalizationFactor = imageSize.height / max / 2
-        let widthNormalizationFactor = imageSize.width / CGFloat(samples.count)
         ///*
-        let framesCount = 100
-        let spaceBtwFrames = 8
-        let lineW = 20
-        let frameW = CGFloat(lineW) + CGFloat(spaceBtwFrames)
-        let frameSize = 1000
+        let samplesInFrame = samples.count / framesCount
         for frameNum in 0..<framesCount - 1 {
             var step = 0
             var frameAv: Float = 0
-            while frameNum * frameSize + step < samples.count && step < frameSize {
-                frameAv += samples[frameNum * frameSize + step] * Float(heightNormalizationFactor)
+            while frameNum * samplesInFrame + step < samples.count && step < samplesInFrame {
+                frameAv += samples[frameNum * samplesInFrame + step] * Float(imageSize.height / max / 2)
                 step += 1
             }
 
             frameAv /= Float(step)
-            print(frameAv, frameNum)
-            frameAv *= Float(heightNormalizationFactor)
+            frameAv *= Float(imageSize.height / max / 2)
 
             let framePos = CGFloat(frameNum) * frameW
             context.move(to: CGPoint(x: framePos, y: middleY - CGFloat(frameAv)))
             context.addLine(to: CGPoint(x: framePos, y: middleY + CGFloat(frameAv)))
             context.setStrokeColor(strokeColor.cgColor)
             context.strokePath()
+            print(framePos, frameNum)
         }
         //*/
         
@@ -94,7 +101,7 @@ class WaveGenerator {
 //            context.addRect(CGRect(x: x, y: middleY + pixel, width: 6, height: imageSize.height))
             context.setStrokeColor(strokeColor.cgColor)
             context.strokePath()
-            print(x)
+//            print(x)
         }
         */
         guard let soundWaveImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
@@ -103,12 +110,16 @@ class WaveGenerator {
         return soundWaveImage
     }
     
-    func generateWaveImage(from audioUrl: URL, in imageSize: CGSize,completion:@escaping (_ waveformImage:UIImage?)->Void) {
-        
-        readBuffer(audioUrl, completion: { result in
-            let img = self.generateWaveImage(result!, imageSize, UIColor.blue, UIColor.white)
+    func generateWaveImage(audioUrl url: URL,
+                           waveHeight h: CGFloat,
+                           audioDuration duration: Double,
+                           zoomLevel: AudioWaveZoomLvls,
+                           completion: @escaping (_ waveImage: UIImage?)->Void) {
+        readBuffer(url) { wave in
+            guard let res = wave else { fatalError("Cant decode audio" ) }
+            let img = self.generateWaveImage(res, h, .black, duration, zoomLevel, .white)
             completion(img)
-        })
+        }
     }
 }
 

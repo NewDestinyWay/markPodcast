@@ -29,6 +29,7 @@
 		EEB48BB52A6C738D00FE5D22 /* план in Resources */ = {isa = PBXBuildFile; fileRef = EEB48BB42A6C738D00FE5D22 /* план */; };
 		EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB65B492A703FCE003F593F /* RSSParser.swift */; };
 		EEB65B4C2A753183003F593F /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EEB65B4B2A753183003F593F /* music.mp3 */; };
+		EEDB9F5D2A950FE1002AFBD9 /* AudioWaveZoomLvls.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB9F5C2A950FE1002AFBD9 /* AudioWaveZoomLvls.swift */; };
 		EEE281222A6CE14600CAB2CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE281212A6CE14600CAB2CF /* NetworkManager.swift */; };
 		EEFA82E42A800DF2005A08CC /* WaveGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,7 @@
 		EEB48BB42A6C738D00FE5D22 /* план */ = {isa = PBXFileReference; lastKnownFileType = text; path = "план"; sourceTree = "<group>"; };
 		EEB65B492A703FCE003F593F /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
 		EEB65B4B2A753183003F593F /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		EEDB9F5C2A950FE1002AFBD9 /* AudioWaveZoomLvls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioWaveZoomLvls.swift; sourceTree = "<group>"; };
 		EEE281212A6CE14600CAB2CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,8 +78,8 @@
 		EE2B6F2F2A7B8061004C23CE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EEDB9F5B2A950FC6002AFBD9 /* WaveGenerator */,
 				EE2B6F302A7B806A004C23CE /* StyledButton.swift */,
-				EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +169,15 @@
 				EE2B6F362A7B97EF004C23CE /* AssetsManager.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		EEDB9F5B2A950FC6002AFBD9 /* WaveGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */,
+				EEDB9F5C2A950FE1002AFBD9 /* AudioWaveZoomLvls.swift */,
+			);
+			path = WaveGenerator;
 			sourceTree = "<group>";
 		};
 		EEE281202A6CE10400CAB2CF /* Network */ = {
@@ -267,6 +278,7 @@
 				EE2B6F392A7B99D2004C23CE /* UIView.swift in Sources */,
 				EE6A96402A93B3C200962C32 /* Podcast.swift in Sources */,
 				EE2B6F352A7B80CC004C23CE /* UIImage.swift in Sources */,
+				EEDB9F5D2A950FE1002AFBD9 /* AudioWaveZoomLvls.swift in Sources */,
 				EEB48BAD2A6AFA7F00FE5D22 /* Links.swift in Sources */,
 				EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */,
 			);

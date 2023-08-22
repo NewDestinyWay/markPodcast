@@ -57,6 +57,10 @@ class ViewController: UIViewController {
         return btn
     }()
     
+//    private var scrollHeightCons: NSLayoutConstraint?
+    private let scrollView = UIScrollView()
+    private let scrollContentView = UIView()
+    
     // MARK: - CROP UI
     enum CropUITags: Int {
         case tfCropFrom = 0
@@ -75,13 +79,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let url = Bundle.main.url(forResource: "music", withExtension: "mp3")!
-        WaveGenerator().generateWaveImage(from: url,
-                                          in: self.view.bounds.size) { waveformImage in
-            DispatchQueue.main.async {
-                let iv = UIImageView(image: waveformImage)
-                iv.attachTo(view: self.view, toSides: [.all4Sides])
-                print("good job")
+        
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOf: url)
+            WaveGenerator().generateWaveImage(audioUrl: url,
+                                              waveHeight: self.view.bounds.height,
+                                              audioDuration: Double(audioPlayer.duration),
+                                              zoomLevel: .sec15) { waveImage in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.scrollView.attachTo(view: self.view, toSides: [.all4Sides])
+
+                    let iv = UIImageView(image: waveImage)
+                    iv.attachTo(view: self.scrollView, toSides: [.left, .top, .bottom, .centerY])
+                    
+                    UIView.animate(withDuration: 0.5) {
+                        self.scrollView.contentSize = waveImage!.size
+                    }
+                    print("good job")
+                }
             }
+            
+        } catch let error {
+            print(error)
         }
         
         /*
