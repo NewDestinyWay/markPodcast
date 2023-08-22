@@ -74,16 +74,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
+        let url = Bundle.main.url(forResource: "music", withExtension: "mp3")!
+        WaveGenerator().generateWaveImage(from: url,
+                                          in: self.view.bounds.size) { waveformImage in
+            DispatchQueue.main.async {
+                let iv = UIImageView(image: waveformImage)
+                iv.attachTo(view: self.view, toSides: [.all4Sides])
+                print("good job")
+            }
+        }
         
+        /*
+        setupUI()
+        print("START!!!")
         model.fetchPodcastInfo(byStringUrl: Links.podcast1.rawValue) { [weak self] podcast in
             guard let self = self else { return }
             self.currentPodcast = podcast
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.playPodcast(fileURL: podcast.audioFileLoc)
+                print("END!!!")
             }
         }
+         */
     }
 }
 
