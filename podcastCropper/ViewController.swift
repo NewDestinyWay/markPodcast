@@ -96,6 +96,7 @@ private extension ViewController {
         sPodcastInfo.attachTo(view: self.view, toSides: [.left, .right])
 
         waveView.attachTo(view: self.view, toSides: [.left, .right])
+        waveView.delegate = self
         NSLayoutConstraint.activate([
             sPodcastInfo.topAnchor.constraint(equalTo: navView.bottomAnchor, constant: 24),
             waveView.topAnchor.constraint(equalTo: sPodcastInfo.bottomAnchor, constant: 24)
@@ -286,5 +287,18 @@ extension ViewController: NavViewDelegate {
     
     func rightBtnTapped() {
         
+    }
+}
+
+// MARK: - AudioWaveViewDelegate
+extension ViewController: AudioWaveViewDelegate {
+    func audioWaveDidScroll(atPercent percent: Double) {
+        let duration = Double(audioPlayer.duration)
+        let time1Percent = duration / 100.0
+        var curTime = percent * time1Percent
+        
+        // timelineView.scrollAt(percent: percent)
+        // TODO: - секунды в часы, минуты
+        // lblCurrentTime.text = String(format: "%.2f", curTime)
     }
 }

@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol AudioWaveViewDelegate {
+    func audioWaveDidScroll(atPercent percent: Double)
+}
+
 final class AudioWaveView: UIView {
     private let waveHeight: CGFloat = 160
+    private var audioDuration: Double = 0
     private var audioWaveWidthCons: NSLayoutConstraint?
-    
+    var delegate: AudioWaveViewDelegate?
     
     private let infoLbl: UILabel = {
         let lbl = UILabel()
@@ -38,6 +43,7 @@ final class AudioWaveView: UIView {
                                           waveHeight: waveHeight,
                                           audioDuration: audioDuration,
                                           zoomLevel: .sec1) { waveImage in
+            self.audioDuration = audioDuration
             DispatchQueue.main.async { [weak self] in
                 guard let self = self,
                       let waveImage = waveImage
@@ -94,6 +100,8 @@ private extension AudioWaveView {
 
 extension AudioWaveView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x, scrollView.contentSize.width)
+        let width1Percent = scrollView.contentSize.width / 100
+        let currentPercent = (scrollView.contentOffset.x + scrollView.contentInset.left) / width1Percent
+        delegate?.audioWaveDidScroll(atPercent: currentPercent)
     }
 }
