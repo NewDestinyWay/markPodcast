@@ -17,47 +17,10 @@ class ViewController: UIViewController {
     private let model = ViewControllerModel()
     
     // MARK: - UI
-    private let podcastNameLbl: UILabel = {
-        let lbl = UILabel()
-        lbl.numberOfLines = 0
-        lbl.font = UIFont.systemFont(ofSize: 24)
-        lbl.textColor = .black
-        lbl.textAlignment = .center
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }()
-    private let progressBar: UIProgressView = {
-        let v = UIProgressView(progressViewStyle: .bar)
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        v.layer.cornerRadius = 8
-        v.backgroundColor = .black
-        v.progressTintColor = .red
-        v.layer.masksToBounds = true
-        return v
-    }()
-    private let playBtn: StyledButton = {
-        let btn = StyledButton()
-        btn.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        btn.image = AssetsManager.Icons.pause.toIcon()
-        return btn
-    }()
-    private let rewindBtn: StyledButton = {
-        let btn = StyledButton()
-        btn.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        btn.title = "-15"
-        btn.titleColor = .black
-        return btn
-    }()
-    private let forwardBtn: StyledButton = {
-        let btn = StyledButton()
-        btn.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        btn.title = "+15"
-        btn.titleColor = .black
-        return btn
-    }()
     
-//    private var scrollHeightCons: NSLayoutConstraint?
+    
+    
+    private var audioWaveWidthCons: NSLayoutConstraint?
     private let scrollView = UIScrollView()
     private let scrollContentView = UIView()
     
@@ -87,16 +50,29 @@ class ViewController: UIViewController {
                                               audioDuration: Double(audioPlayer.duration),
                                               zoomLevel: .sec15) { waveImage in
                 DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
+                    guard let self = self,
+                          let waveImage = waveImage
+                    else { return }
                     
                     self.scrollView.attachTo(view: self.view, toSides: [.all4Sides])
 
                     let iv = UIImageView(image: waveImage)
-                    iv.attachTo(view: self.scrollView, toSides: [.left, .top, .bottom, .centerY])
+                    iv.attachTo(view: self.scrollView, toSides: [.all4Sides, .centerY])
                     
+                    self.scrollView.showsVerticalScrollIndicator = false
+                    self.scrollView.showsHorizontalScrollIndicator = true
+                    self.scrollView.contentSize = waveImage.size
+                    self.scrollView.showsHorizontalScrollIndicator = false
+                    let halfWidth = self.view.bounds.size.width / 2
+                    self.scrollView.contentInset = UIEdgeInsets(
+                        top: 0, left: halfWidth, bottom: 0, right: halfWidth)
+                    print(halfWidth)
                     UIView.animate(withDuration: 0.5) {
-                        self.scrollView.contentSize = waveImage!.size
+                        self.audioWaveWidthCons?.isActive = false
+                        self.audioWaveWidthCons = iv.widthAnchor.constraint(equalToConstant: waveImage.size.width)
+                        self.audioWaveWidthCons?.isActive = true
                     }
+                    
                     print("good job")
                 }
             }
@@ -124,29 +100,6 @@ class ViewController: UIViewController {
 // MARK: - Private
 private extension ViewController {
     func setupUI() {
-        podcastNameLbl.attachTo(view: self.view, toSides: [.centerY], constant: 16)
-        progressBar.attachTo(view: self.view, toSides: [.left], constant: 16)
-        
-        let v = UIView()
-        rewindBtn.attachTo(view: v, toSides: [.left, .bottom, .top])
-        playBtn.attachTo(view: v, toSides: [.centerX, .top, .bottom])
-        forwardBtn.attachTo(view: v, toSides: [.right, .top, .bottom])
-        v.attachTo(view: self.view, toSides: [.left], constant: 16)
-        
-        NSLayoutConstraint.activate([
-            podcastNameLbl.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
-            podcastNameLbl.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
-            
-            progressBar.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
-            progressBar.topAnchor.constraint(equalTo: podcastNameLbl.bottomAnchor, constant: 20),
-            
-            v.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
-            v.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -60)
-        ])
-        
-        playBtn.addTarget(self, action: #selector(playBtnTapped), for: .touchUpInside)
-        rewindBtn.addTarget(self, action: #selector(rewindBtnTapped), for: .touchUpInside)
-        forwardBtn.addTarget(self, action: #selector(forwardBtnTapped), for: .touchUpInside)
     }
     
     func playPodcast(fileURL: URL?) {

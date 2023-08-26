@@ -55,7 +55,6 @@ class WaveGenerator {
         // а дальше рисуем
         
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
-        
         guard let context: CGContext = UIGraphicsGetCurrentContext() else { return nil }
         
         let drawingRect = CGRect(origin: .zero, size: imageSize)
@@ -64,11 +63,10 @@ class WaveGenerator {
         context.setFillColor(backgroundColor.cgColor)
         context.setAlpha(1.0)
         context.fill(drawingRect)
-        
         context.setLineWidth(audioLineW)
         
         let max: CGFloat = CGFloat(samples.max() ?? 0)
-        ///*
+
         let samplesInFrame = samples.count / framesCount
         for frameNum in 0..<framesCount - 1 {
             var step = 0
@@ -86,24 +84,9 @@ class WaveGenerator {
             context.addLine(to: CGPoint(x: framePos, y: middleY + CGFloat(frameAv)))
             context.setStrokeColor(strokeColor.cgColor)
             context.strokePath()
-            print(framePos, frameNum)
+//            print(framePos, frameNum)
         }
-        //*/
         
-        /*
-        for index in 0 ..< samples.count {
-            let pixel = CGFloat(samples[index]) * heightNormalizationFactor
-            
-            let x = CGFloat(index) * widthNormalizationFactor
-            
-            context.move(to: CGPoint(x: x, y: middleY - pixel))
-            context.addLine(to: CGPoint(x: x, y: middleY + pixel))
-//            context.addRect(CGRect(x: x, y: middleY + pixel, width: 6, height: imageSize.height))
-            context.setStrokeColor(strokeColor.cgColor)
-            context.strokePath()
-//            print(x)
-        }
-        */
         guard let soundWaveImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         
         UIGraphicsEndImageContext()
