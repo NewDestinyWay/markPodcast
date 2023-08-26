@@ -17,12 +17,23 @@ class ViewController: UIViewController {
     private let model = ViewControllerModel()
     
     // MARK: - UI
+    private var navView: NavView!
+    private let lblPodcastName: UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = .black
+        lbl.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        lbl.textAlignment = .center
+        return lbl
+    }()
+    private let lblPodcastAuthor: UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = .black
+        lbl.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        lbl.textAlignment = .center
+        return lbl
+    }()
     
-    
-    
-    private var audioWaveWidthCons: NSLayoutConstraint?
-    private let scrollView = UIScrollView()
-    private let scrollContentView = UIView()
+    private let waveView = AudioWaveView()
     
     // MARK: - CROP UI
     enum CropUITags: Int {
@@ -43,40 +54,13 @@ class ViewController: UIViewController {
         
         let url = Bundle.main.url(forResource: "music", withExtension: "mp3")!
         
+        setupUI()
         do {
             try audioPlayer = AVAudioPlayer(contentsOf: url)
-            WaveGenerator().generateWaveImage(audioUrl: url,
-                                              waveHeight: self.view.bounds.height,
-                                              audioDuration: Double(audioPlayer.duration),
-                                              zoomLevel: .sec15) { waveImage in
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self,
-                          let waveImage = waveImage
-                    else { return }
-                    
-                    self.scrollView.attachTo(view: self.view, toSides: [.all4Sides])
-
-                    let iv = UIImageView(image: waveImage)
-                    iv.attachTo(view: self.scrollView, toSides: [.all4Sides, .centerY])
-                    
-                    self.scrollView.showsVerticalScrollIndicator = false
-                    self.scrollView.showsHorizontalScrollIndicator = true
-                    self.scrollView.contentSize = waveImage.size
-                    self.scrollView.showsHorizontalScrollIndicator = false
-                    let halfWidth = self.view.bounds.size.width / 2
-                    self.scrollView.contentInset = UIEdgeInsets(
-                        top: 0, left: halfWidth, bottom: 0, right: halfWidth)
-                    print(halfWidth)
-                    UIView.animate(withDuration: 0.5) {
-                        self.audioWaveWidthCons?.isActive = false
-                        self.audioWaveWidthCons = iv.widthAnchor.constraint(equalToConstant: waveImage.size.width)
-                        self.audioWaveWidthCons?.isActive = true
-                    }
-                    
-                    print("good job")
-                }
+            waveView.config(forAudioByUrl: url,
+                            audioDuration: Double(audioPlayer.duration)) {
+                
             }
-            
         } catch let error {
             print(error)
         }
@@ -100,8 +84,24 @@ class ViewController: UIViewController {
 // MARK: - Private
 private extension ViewController {
     func setupUI() {
+        navView = NavViewBuilder.createSnippet.navView(delegate: self)
+        navView.attachTo(view: self.view, toSides: [.left, .right, .top])
+        
+        let sPodcastInfo = UIStackView(arrangedSubviews: [
+            lblPodcastName, lblPodcastAuthor])
+        sPodcastInfo.axis = .vertical
+        sPodcastInfo.spacing = 8
+        sPodcastInfo.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        sPodcastInfo.distribution = .fillEqually
+        sPodcastInfo.attachTo(view: self.view, toSides: [.left, .right])
+
+        waveView.attachTo(view: self.view, toSides: [.left, .right])
+        NSLayoutConstraint.activate([
+            sPodcastInfo.topAnchor.constraint(equalTo: navView.bottomAnchor, constant: 24),
+            waveView.topAnchor.constraint(equalTo: sPodcastInfo.bottomAnchor, constant: 24)
+        ])
     }
-    
+        
     func playPodcast(fileURL: URL?) {
         guard let fileURL = fileURL else {
             self.showAlert(title: "Error", message: "We can't find downloaded podcast")
@@ -113,7 +113,7 @@ private extension ViewController {
             audioPlayer.play()
             audioPlayer.delegate = self
             
-            podcastNameLbl.text = currentPodcast.title
+//            podcastNameLbl.text = currentPodcast.title
             playbackUpdater = CADisplayLink(target: self, selector: #selector(playbackProgressDidChange))
             playbackUpdater.preferredFramesPerSecond = 1
             playbackUpdater.add(to: .current, forMode: .common)
@@ -193,10 +193,10 @@ private extension ViewController {
 private extension ViewController {
     @objc func playBtnTapped() {
         if audioPlayer.isPlaying {
-            playBtn.image = AssetsManager.Icons.play.toIcon()
+//            playBtn.image = AssetsManager.Icons.play.toIcon()
             audioPlayer.pause()
         } else {
-            playBtn.image = AssetsManager.Icons.pause.toIcon()
+//            playBtn.image = AssetsManager.Icons.pause.toIcon()
             audioPlayer.play()
         }
     }
@@ -218,7 +218,7 @@ private extension ViewController {
     
     @objc func playbackProgressDidChange() {
         let normalizedTime = Float(audioPlayer.currentTime / audioPlayer.duration)
-        progressBar.setProgress(normalizedTime, animated: true)
+//        progressBar.setProgress(normalizedTime, animated: true)
     }
     
     @objc func pickerDoneBtnTapped() {
@@ -275,5 +275,16 @@ extension ViewController: AVAudioPlayerDelegate {
 extension ViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
 //        currentTextFieldTag = textField.tag
+    }
+}
+
+// MARK: - NavViewDelegate
+extension ViewController: NavViewDelegate {
+    func leftBtnTapped() {
+        
+    }
+    
+    func rightBtnTapped() {
+        
     }
 }

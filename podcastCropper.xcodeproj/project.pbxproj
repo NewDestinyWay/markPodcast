@@ -33,6 +33,8 @@
 		EEDB9F5F2A99DFB3002AFBD9 /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB9F5E2A99DFB3002AFBD9 /* NavView.swift */; };
 		EEDB9F622A99E168002AFBD9 /* NavViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB9F612A99E168002AFBD9 /* NavViewConfig.swift */; };
 		EEDB9F642A99E1B3002AFBD9 /* NavViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB9F632A99E1B3002AFBD9 /* NavViewBuilder.swift */; };
+		EEDB9F662A99F373002AFBD9 /* AudioWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB9F652A99F373002AFBD9 /* AudioWaveView.swift */; };
+		EEDB9F682A99F3AC002AFBD9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB9F672A99F3AC002AFBD9 /* UIColor.swift */; };
 		EEE281222A6CE14600CAB2CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE281212A6CE14600CAB2CF /* NetworkManager.swift */; };
 		EEFA82E42A800DF2005A08CC /* WaveGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +68,8 @@
 		EEDB9F5E2A99DFB3002AFBD9 /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		EEDB9F612A99E168002AFBD9 /* NavViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavViewConfig.swift; sourceTree = "<group>"; };
 		EEDB9F632A99E1B3002AFBD9 /* NavViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavViewBuilder.swift; sourceTree = "<group>"; };
+		EEDB9F652A99F373002AFBD9 /* AudioWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioWaveView.swift; sourceTree = "<group>"; };
+		EEDB9F672A99F3AC002AFBD9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		EEE281212A6CE14600CAB2CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +111,7 @@
 				EE2B6F322A7B807F004C23CE /* UIButton.swift */,
 				EE2B6F342A7B80CC004C23CE /* UIImage.swift */,
 				EE2B6F382A7B99D2004C23CE /* UIView.swift */,
+				EEDB9F672A99F3AC002AFBD9 /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			children = (
 				EEFA82E32A800DF2005A08CC /* WaveGenerator.swift */,
 				EEDB9F5C2A950FE1002AFBD9 /* AudioWaveZoomLvls.swift */,
+				EEDB9F652A99F373002AFBD9 /* AudioWaveView.swift */,
 			);
 			path = WaveGenerator;
 			sourceTree = "<group>";
@@ -296,8 +302,10 @@
 				EE6A96402A93B3C200962C32 /* Podcast.swift in Sources */,
 				EEDB9F642A99E1B3002AFBD9 /* NavViewBuilder.swift in Sources */,
 				EE2B6F352A7B80CC004C23CE /* UIImage.swift in Sources */,
+				EEDB9F662A99F373002AFBD9 /* AudioWaveView.swift in Sources */,
 				EEDB9F5F2A99DFB3002AFBD9 /* NavView.swift in Sources */,
 				EEDB9F622A99E168002AFBD9 /* NavViewConfig.swift in Sources */,
+				EEDB9F682A99F3AC002AFBD9 /* UIColor.swift in Sources */,
 				EEDB9F5D2A950FE1002AFBD9 /* AudioWaveZoomLvls.swift in Sources */,
 				EEB48BAD2A6AFA7F00FE5D22 /* Links.swift in Sources */,
 				EEB65B4A2A703FCE003F593F /* RSSParser.swift in Sources */,

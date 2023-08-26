@@ -50,10 +50,13 @@ final class NavView: UIView {
     }
     
     private func commonInit(viewConfig cfg: NavViewConfig = NavViewConfig()) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         leftBtn.attachTo(view: self, toSides: [.centerY])
         titleLbl.attachTo(view: self, toSides: [.centerY, .centerX])
         rightBtn.attachTo(view: self, toSides: [.centerY])
         NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: 48),
             leftBtn.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             rightBtn.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16)
         ])
