@@ -67,7 +67,7 @@ final class AudioWaveView: UIView {
                     self.audioWaveWidthCons?.isActive = false
                     self.audioWaveWidthCons = iv.widthAnchor.constraint(equalToConstant: waveImage.size.width)
                     self.audioWaveWidthCons?.isActive = true
-                    
+                    print("Img: ", waveImage.size.width)
                     completion()
                 }
                 
@@ -100,7 +100,7 @@ private extension AudioWaveView {
 
 extension AudioWaveView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let width1Percent = scrollView.contentSize.width / 100
+        let width1Percent = (scrollView.contentSize.width + scrollView.contentInset.left) / 100
         let currentPercent = (scrollView.contentOffset.x + scrollView.contentInset.left) / width1Percent
         delegate?.audioWaveDidScroll(atPercent: currentPercent)
     }

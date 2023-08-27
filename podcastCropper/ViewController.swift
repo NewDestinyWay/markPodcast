@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     }()
     
     private let waveView = AudioWaveView()
+    private let timelineView = TimeLineView()
     
     // MARK: - CROP UI
     enum CropUITags: Int {
@@ -59,7 +60,8 @@ class ViewController: UIViewController {
             try audioPlayer = AVAudioPlayer(contentsOf: url)
             waveView.config(forAudioByUrl: url,
                             audioDuration: Double(audioPlayer.duration)) {
-                
+                self.timelineView.config(zoomLvl: .sec1,
+                                         audioDuration: Double(self.audioPlayer.duration))
             }
         } catch let error {
             print(error)
@@ -97,9 +99,12 @@ private extension ViewController {
 
         waveView.attachTo(view: self.view, toSides: [.left, .right])
         waveView.delegate = self
+        
+        timelineView.attachTo(view: self.view, toSides: [.left, .right])
         NSLayoutConstraint.activate([
             sPodcastInfo.topAnchor.constraint(equalTo: navView.bottomAnchor, constant: 24),
-            waveView.topAnchor.constraint(equalTo: sPodcastInfo.bottomAnchor, constant: 24)
+            waveView.topAnchor.constraint(equalTo: sPodcastInfo.bottomAnchor, constant: 24),
+            timelineView.topAnchor.constraint(equalTo: waveView.bottomAnchor)
         ])
     }
         
@@ -293,11 +298,12 @@ extension ViewController: NavViewDelegate {
 // MARK: - AudioWaveViewDelegate
 extension ViewController: AudioWaveViewDelegate {
     func audioWaveDidScroll(atPercent percent: Double) {
+        timelineView.setProgress(inPercents: percent)
+        
         let duration = Double(audioPlayer.duration)
         let time1Percent = duration / 100.0
         var curTime = percent * time1Percent
-        
-        // timelineView.scrollAt(percent: percent)
+        print(curTime)
         // TODO: - секунды в часы, минуты
         // lblCurrentTime.text = String(format: "%.2f", curTime)
     }

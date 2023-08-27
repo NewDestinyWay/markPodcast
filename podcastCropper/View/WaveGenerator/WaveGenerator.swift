@@ -46,13 +46,17 @@ class WaveGenerator {
         let audioLineW: CGFloat = 4
         let spaceBtwAudioLines: CGFloat = 2
         let frameW = audioLineW + spaceBtwAudioLines
-        let framesInTimeSection = 25
+//        4950
         
-        let framesCount = Int(duration / zoomTimeInterval.rawValue * Double(framesInTimeSection))
-        var imgTotalWidth = CGFloat(framesCount) * audioLineW
-        imgTotalWidth += CGFloat(framesCount) * spaceBtwAudioLines
-        let imageSize = CGSize(width: imgTotalWidth, height: imageHeight)
+//        4950 * 6 = 29706
+        let sectionsCount = Int(duration / zoomTimeInterval.seconds)
+        let timelineWidth = Constants.TIMELINE_VIEW_SECTION_W * sectionsCount * Constants.TIMELINE_VIEW_SECTION_SUBSECTIONS_COUNT
+        let framesCount = CGFloat(timelineWidth) / (audioLineW + spaceBtwAudioLines)
+        
+        let imageSize = CGSize(width: CGFloat(timelineWidth), height: imageHeight)
         // а дальше рисуем
+        // let secCount = Int(duration / zoomLvl.seconds)
+        // let scrollWidth: CGFloat = CGFloat(secCount) * (sepWidth + sectionsSpacing)
         
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
         guard let context: CGContext = UIGraphicsGetCurrentContext() else { return nil }
@@ -67,8 +71,8 @@ class WaveGenerator {
         
         let max: CGFloat = CGFloat(samples.max() ?? 0)
 
-        let samplesInFrame = samples.count / framesCount
-        for frameNum in 0..<framesCount - 1 {
+        let samplesInFrame = samples.count / Int(framesCount)
+        for frameNum in 0..<Int(framesCount) - 1 {
             var step = 0
             var frameAv: Float = 0
             while frameNum * samplesInFrame + step < samples.count && step < samplesInFrame {
@@ -84,12 +88,12 @@ class WaveGenerator {
             context.addLine(to: CGPoint(x: framePos, y: middleY + CGFloat(frameAv)))
             context.setStrokeColor(strokeColor.cgColor)
             context.strokePath()
-//            print(framePos, frameNum)
         }
         
         guard let soundWaveImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         
         UIGraphicsEndImageContext()
+
         return soundWaveImage
     }
     
